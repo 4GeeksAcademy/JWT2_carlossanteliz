@@ -36,11 +36,7 @@ def login():
     if not user or not check_password_hash(user.password, data["password"]):
         return jsonify({"msg": "invalid email or password"}), 401
 
-    # username = request.json.get("username", None)
-    # password = request.json.get("password", None)
-    # if username != "test" or password != "test":
-    #     return jsonify({"msg": "Bad username or password"}), 401
-
+    
     access_token = create_access_token(identity=user.id)
     return jsonify({
         "token": access_token,
@@ -48,7 +44,7 @@ def login():
         "user": user.serialize()}), 200
 
 
-@api.route('/user', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def create_user():
 
     data = request.get_json()
@@ -57,7 +53,7 @@ def create_user():
         return jsonify({"msg": "no se proporcionaron datos"}), 400
 
     email = data.get("email")
-    # password=data.get("password")
+    
     username = data.get("username")
 
     existing_user = User.query.filter_by(email=email).first()
@@ -66,8 +62,6 @@ def create_user():
 
     hashed_password = generate_password_hash(data["password"])
 
-    # //validar que el usuario ya exista ,400
-    # //validar que mande todos los campos ,400
 
     new_user = User(
         email=email,
