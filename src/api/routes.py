@@ -50,7 +50,7 @@ def create_user():
     data = request.get_json()
 
     if not data:
-        return jsonify({"msg": "no se proporcionaron datos"}), 400
+        return jsonify({"msg": "No se proporcionaron datos"}), 400
 
     email = data.get("email")
     
