@@ -27,7 +27,7 @@ export const Navbar = () => {
 								<li className="nav-item">
 									<Link className="nav-link" to="/signup">Signup</Link>
 								</li>
-								{/* 👇 botón visible solo si hay token */}
+								
 								<li className="nav-item">
 									<Link className="nav-link" to="/private">Private Page</Link>
 								</li>
