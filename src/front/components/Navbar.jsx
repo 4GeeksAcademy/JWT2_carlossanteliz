@@ -23,9 +23,15 @@ export const Navbar = () => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 						{token && (
-							<li className="nav-item">
-								<Link className="nav-link" to="/signup">Signup</Link>
-							</li>
+							<>
+								<li className="nav-item">
+									<Link className="nav-link" to="/signup">Signup</Link>
+								</li>
+								{/* 👇 botón visible solo si hay token */}
+								<li className="nav-item">
+									<Link className="nav-link" to="/private">Private Page</Link>
+								</li>
+							</>
 						)}
 					</ul>
 

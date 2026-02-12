@@ -36,7 +36,7 @@ def login():
     if not user or not check_password_hash(user.password, data["password"]):
         return jsonify({"msg": "invalid email or password"}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify({
         "token": access_token,
         "message": "logged in sucessfully",
@@ -75,3 +75,16 @@ def create_user():
     except Exception as e:
         print(f"Error al obtener usuarios: {e}")
         return jsonify({"msg": "Internal Server Error", "error": str(e)}), 500
+
+
+@api.route("/protected", methods=["GET"])
+@jwt_required() 
+def protected():
+    current_user_id = int(get_jwt_identity())
+
+    users = User.query.all()
+    users_data = [u.serialize() for u in users]
+
+    return jsonify({ 
+        "logged_in_as": current_user_id, 
+        "users": users_data }), 200

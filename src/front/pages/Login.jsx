@@ -54,7 +54,7 @@ export const Login = () => {
                 }
             });
 
-            // navigate("/protected");
+            navigate("/private");
 
         } catch (error) {
             console.error("Login error:", error);
