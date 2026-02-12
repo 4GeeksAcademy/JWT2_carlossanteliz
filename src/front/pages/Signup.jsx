@@ -30,7 +30,7 @@ const Signup = () => {
       }
 
       alert("Signup successful, please log in")
-      navigate("/")
+      navigate("/login")
     } catch (error) {
       console.error("Signup error:", error)
       alert("Signup failed")

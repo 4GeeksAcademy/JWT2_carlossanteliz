@@ -36,7 +36,6 @@ def login():
     if not user or not check_password_hash(user.password, data["password"]):
         return jsonify({"msg": "invalid email or password"}), 401
 
-    
     access_token = create_access_token(identity=user.id)
     return jsonify({
         "token": access_token,
@@ -53,7 +52,7 @@ def create_user():
         return jsonify({"msg": "No se proporcionaron datos"}), 400
 
     email = data.get("email")
-    
+
     username = data.get("username")
 
     existing_user = User.query.filter_by(email=email).first()
@@ -61,7 +60,6 @@ def create_user():
         return jsonify({"msg": "ya existe un usuario con ese email"}), 409
 
     hashed_password = generate_password_hash(data["password"])
-
 
     new_user = User(
         email=email,
